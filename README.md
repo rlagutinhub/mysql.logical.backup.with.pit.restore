@@ -1,39 +1,6 @@
 MYSQL ЛОГ. РЕЗ. КОПИРОВАНИЕ (mysqldump), BINLOG BACKUP (mysqlbinlog) С ВОЗМОЖНОСТЬЮ PIT ВОССТАНОВЛЕНИЯ.
 ----------------------------------------------------------------------------------------------------
-DATE: 2018-07-04.13-32-15
-EXEC: ./mysql.logical.backup.with.pit.restore.sh
 
-HOST: jira
-DOM:  dev.mta4.ru
-IP:   192.168.1.16
-
-MYSQL_USER:       root
-MYSQL_PASS:       ******
-MYSQL_HOST:       localhost
-MYSQL_PORT:       3306
-MYSQL_DB:         testdb, testdb2
-
-MYSQL_BACKUP_DIR: /backup/current/
-MYSQL_BACKUP_LOG: /backup/current/backup.log
-
-MYSQL_BACKUP_DISK:           /backup
-MYSQL_BACKUP_DISK_THRESHOLD: 10%
-
-MAIL_SERVER:  mail.example.com:25
-MAIL_FROM:    MySQL Logical Backup <jira@example.com>
-MAIL_TO:      lagutin_ra@example.com
-MAIL_VERBOSE: ONLY_FAIL
-
-SCRIPT_FILE: ./mysql.logical.backup.with.pit.restore.sh
-SCRIPT_ARGS:
-SCRIPT_LOG:  /backup/mysql.logical.backup.with.pit.restore.sh.2018-07-04.13-32-15.log
-
-MYSQL_DOCS: https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html
-            https://dev.mysql.com/doc/refman/5.7/en/mysqlbinlog.html
-            https://dev.mysql.com/doc/refman/5.7/en/mysqlbinlog-backup.html
-            https://dev.mysql.com/doc/refman/5.7/en/point-in-time-recovery.html
-            https://www.percona.com/blog/2013/02/08/how-to-createrestore-a-slave-using-gtid-replication-in-mysql-5-6/
-----------------------------------------------------------------------------------------------------
 Требуемые параметры MySQL
 
 Важно: Бинырный лог на MySQL сервере должнен быть включен и формат бинарных логов должен быть ROW.
