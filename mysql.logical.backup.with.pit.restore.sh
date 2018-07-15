@@ -473,7 +473,7 @@ function CHECK_ROOT() {
 # $1 - PROG NAME
 function CHECK_PID() {
 
-    if [ $(pidof -x $(which mysqldump)) ] || [ $(pidof -x $(which mysqlbinlog)) ]; then
+    if [ $(/usr/sbin/pidof -x $(which mysqldump)) ] || [ $(/usr/sbin/pidof -x $(which mysqlbinlog)) ]; then
 
         $SETCOLOR_RED_BG; echo -en 'FAIL'; $SETCOLOR_WHITE; echo -en ' CHECK_PID ';  $SETCOLOR_GREEN; echo -en '# mysqldump и mysqlbinlog не должны выполняется в момент запуска скрипта.'; $SETCOLOR_WHITE; echo -e
         SEND_MAIL; exit 1
