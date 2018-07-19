@@ -573,11 +573,11 @@ function CHECK_FREE_DISK_SPACE() {
 
     if [ $(( 100 - check_free_disk_space )) -ge $2 ]; then
 
-        $SETCOLOR_GREEN_BG; echo -en ' OK '; $SETCOLOR_WHITE; echo -en ' CHECK_FREE_DISK_SPACE ';  $SETCOLOR_GREEN; echo -en '# свободное место на диске хранения рез. копий '$check_free_disk_space'% должно быть > чем threshold '$2'%.'; $SETCOLOR_WHITE; echo -e
+        $SETCOLOR_GREEN_BG; echo -en ' OK '; $SETCOLOR_WHITE; echo -en ' CHECK_FREE_DISK_SPACE ';  $SETCOLOR_GREEN; echo -en '# свободное место на диске хранения рез. копий '$(( 100 - check_free_disk_space ))'% должно быть > чем threshold '$2'%.'; $SETCOLOR_WHITE; echo -e
 
     else
 
-        $SETCOLOR_RED_BG; echo -en 'FAIL'; $SETCOLOR_WHITE; echo -en ' CHECK_FREE_DISK_SPACE ';  $SETCOLOR_GREEN; echo -en '# свободное место на диске хранения рез. копий '$check_free_disk_space'% должно быть > чем threshold '$2'%.'; $SETCOLOR_WHITE; echo -e
+        $SETCOLOR_RED_BG; echo -en 'FAIL'; $SETCOLOR_WHITE; echo -en ' CHECK_FREE_DISK_SPACE ';  $SETCOLOR_GREEN; echo -en '# свободное место на диске хранения рез. копий '$(( 100 - check_free_disk_space ))'% должно быть > чем threshold '$2'%.'; $SETCOLOR_WHITE; echo -e
         SEND_MAIL; exit 1
 
     fi
