@@ -154,6 +154,23 @@
      | mysql
 ```
 
+Или можно сформировать sql файл и применить его отдельно
+
+```console
+    mysqlbinlog \
+     --skip-gtids \
+     --start-position=194 \
+     --stop-datetime="2018-07-02 21:52:16" \
+     --database=testdb \
+     mysql-bin.000002 \
+     mysql-bin.000003 \
+     mysql-bin.000004 \
+     mysql-bin.000005 \
+     | gzip -9 > db.binlog.$(date +"%Y%m%d%H%M").sql.gz
+     
+     pv db.binlog.201808251510.sql.gz | gunzip | mysql testdb
+```
+
 ---
 
 ![alt text](https://github.com/rlagutinhub/mysql.logical.backup.with.pit.restore/blob/master/screen1.png)
