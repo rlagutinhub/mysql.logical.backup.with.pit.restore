@@ -51,6 +51,25 @@
      --databases "db1" "db2" > ~/db.sql
 ```
 
+Или создать рез. копию с gzip
+
+```console
+    mysqldump \
+     -u root \
+     -h localhost \
+     -p1qaz@WSX \
+     --default-character-set=utf8 \
+     --max-allowed-packet=1G \
+     --single-transaction \
+     --routines \
+     --events \
+     --triggers \
+     --flush-logs \
+     --master-data=2 \
+     --databases "db1" "db2" \
+     | gzip -9 > db.full.$(date +"%Y%m%d%H%M").sql.gz
+```
+
 #### Опрелите MASTER_LOG_FILE и MASTER_LOG_POS
 
 Важно: Если включена GTID репликация, то в дамп файл будет также включена информация GTID state at the beginning of the backup.
@@ -60,6 +79,13 @@
 
 ```console
     cat db.sql | grep -A 5 'Position to start replication or point-in-time recovery from'
+    -- CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=194;
+```
+
+или если c gzip
+
+```console
+    gunzip < db.full.201808251716.sql.gz | grep -A 5 'Position to start replication or point-in-time recovery from'
     -- CHANGE MASTER TO MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=194;
 ```
 
@@ -151,7 +177,7 @@
      mysql-bin.000003 \
      mysql-bin.000004 \
      mysql-bin.000005 \
-     | mysql
+     | mysql testdb
 ```
 
 Или можно сформировать sql файл и применить его отдельно с прогрессбаром
