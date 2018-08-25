@@ -94,14 +94,22 @@
 
 #### Создайте пустую БД и выполните в нее восстановление из Full бэкапа
 
-Важно: Поскльку дамп включает бэкап нескольких БД, то восстановление выполнить обязательно с аргументом one-database, в кот. указать восстанавливаемую БД!
+Важно: Поскльку дамп включает бэкап нескольких БД, то восстановление выполнить обязательно с аргументом one-database, в кот. указать восстанавливаемую БД! Директива one-database будет применять sql команды только где указанная БД определена операторм use базой данных по умолчанию.
+
        Ошибка восстановления с включенныи GTID - https://www.percona.com/blog/2013/02/08/how-to-createrestore-a-slave-using-gtid-replication-in-mysql-5-6/
         ERROR 1840 (HY000) at line 33: @@GLOBAL.GTID_PURGED can only be set when @@GLOBAL.GTID_EXECUTED is empty.
         Решение, перед восстановлением (только на сервере где восстанавливаете, или мастер или славе) сбросьте пар-ы reset master;
 
 ```console
     CREATE DATABASE testdb;
-    mysql --one-database testdb < ~/db.sql
+    mysql --one-database testdb < ~/db.sql или pv ~/db.sql | mysql --one-database testdb
+```
+
+В случае, если sql с применением gzip
+
+```console
+    CREATE DATABASE testdb;
+    gunzip < db.sql.gz | mysql --one-database testdb или pv db.sql.gz | gunzip | mysql --one-database testdb
 ```
 
 #### Определите point-in-time для восстановления из бинарного лога
