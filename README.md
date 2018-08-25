@@ -129,9 +129,9 @@
      mysql-bin.000003 \
      mysql-bin.000004 \
      mysql-bin.000005 \
-     > ~/db.decode.binlog.sql
+     | gzip -9 > db.binlog.decode.$(date +"%Y%m%d%H%M").sql.gz
 
-    less db.decode.binlog.sql
+    gunzip < db.binlog.decode.201808251509.sql.gz | less
 ```
 
 Например, нужно выполнить восстановление до выполнения INSERT INTO testdb.example VALUES (5, '5'); те не включать.
