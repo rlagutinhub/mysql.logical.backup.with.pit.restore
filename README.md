@@ -157,7 +157,7 @@
 Или можно выполнить восстановление с прогрессбаром
 
 ```console
-    mysqlbinlog \
+    pv | mysqlbinlog \
      --skip-gtids \
      --start-position=194 \
      --stop-datetime="2018-07-02 21:52:16" \
@@ -172,7 +172,7 @@
 Или можно сформировать sql файл и применить его отдельно с прогрессбаром
 
 ```console
-    pv | mysqlbinlog \
+    mysqlbinlog \
      --skip-gtids \
      --start-position=194 \
      --stop-datetime="2018-07-02 21:52:16" \
